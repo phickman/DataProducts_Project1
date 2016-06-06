@@ -1,0 +1,60 @@
+Shiny Carats Presentation
+========================================================
+author: Paul Hickman
+date: June 2016
+autosize: true
+
+An explanation of how diamond buyers can check they are getting a good deal.
+
+The Problem
+========================================================
+
+Diamond buyers need to negotiate price with sellers.  Experienced buyers are more able to negotiate better prices that newer buyers.  Using this system will level the playing field for buyers by using historical prices to predict current and future prices.
+
+- Easy to use
+- Predicts diamonds based on carat size
+- Based on historical prices
+
+Prediction
+========================================================
+
+The coefficients for the prediction of diamond price based on carat size is very good.
+
+```{r}
+library(UsingR); data(diamond)
+y <- diamond$price; x <- diamond$carat;
+
+fit <- lm(y ~ x);
+summary(fit)$coefficients
+```
+
+Confidence Intervals
+========================================================
+
+We are very confident in the regression line, so the interval is very narrow.
+
+```{r, echo=FALSE}
+library(ggplot2)
+newx = data.frame(x = seq(min(x), max(x), length = 100))
+p1 = data.frame(predict(fit, newdata= newx,interval = ("confidence")))
+p2 = data.frame(predict(fit, newdata = newx,interval = ("prediction")))
+p1$interval = "confidence"
+p2$interval = "prediction"
+p1$x = newx$x
+p2$x = newx$x
+dat = rbind(p1, p2)
+names(dat)[1] = "y"
+g = ggplot(dat, aes(x = x, y = y))
+g = g + geom_ribbon(aes(ymin = lwr, ymax = upr, fill = interval), alpha = 0.2)
+g = g + geom_line()
+g = g + geom_point(data = data.frame(x = x, y=y), aes(x = x, y = y), size = 4)
+g
+```
+
+Summary
+========================================================
+
+- Fast and simple to use
+- Highly accurate prediction
+- Levels buyer experience
+- Drive down price of diamonds
