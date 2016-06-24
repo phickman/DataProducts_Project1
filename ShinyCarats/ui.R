@@ -16,11 +16,16 @@ shinyUI(fluidPage(
   sidebarLayout(
     sidebarPanel(
         p("Move the slider to select your desired carat size."),
-      sliderInput("size",
-                  "Carrat size:",
-                  min = 0.1,
-                  max = 1.0,
-                  value = 0.01)
+        sliderInput("size",
+                    "Carrat size:",
+                    min = 0.5,
+                    max = 5.0,
+                    value = 0.01),
+        p("Select the Cut of the diamond."),
+        radioButtons("cut",
+                     "Diamond Cut:", 
+                     choices = c("Fair","Good","Very Good","Premium","Ideal"), 
+                     selected = "Ideal")
     ),
 
     # Show a plot of the generated distribution

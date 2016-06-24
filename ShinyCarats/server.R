@@ -13,9 +13,9 @@ library(shiny)
 shinyServer(function(input, output) {
 
   output$prediction <- renderPrint({
-      fit <- lm(price ~ carat, data = diamond)
-      p <- predict(fit, newdata = data.frame(carat = input$size))
-      paste0(input$size," carat diamond is $", formatC(p[1], format="f", digits=2, big.mark=","))
+      fit <- lm(price ~ carat+cut, data = diamonds)
+      p <- predict(fit, newdata = data.frame(carat = input$size, cut = input$cut))
+      paste0(input$size, " carat, ", input$cut," cut diamond is $", formatC(p[1], format="f", digits=2, big.mark=","))
       })
 
 })

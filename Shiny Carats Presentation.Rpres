@@ -12,19 +12,18 @@ The Problem
 Diamond buyers need to negotiate price with sellers.  Experienced buyers are more able to negotiate better prices that newer buyers.  Using this system will level the playing field for buyers by using historical prices to predict current and future prices.
 
 - Easy to use
-- Predicts diamonds based on carat size
+- Predicts diamonds based on carat size and cut
 - Based on historical prices
 
 Prediction
 ========================================================
 
-The coefficients for the prediction of diamond price based on carat size is very good.
+The coefficients for the prediction of diamond price based on carat size and cut is very good.
 
-```{r}
+```{r echo=FALSE}
 library(UsingR); data(diamond)
-y <- diamond$price; x <- diamond$carat;
 
-fit <- lm(y ~ x);
+fit <- lm(price ~ carat+cut, data = diamonds);
 summary(fit)$coefficients
 ```
 
@@ -35,6 +34,9 @@ We are very confident in the regression line, so the interval is very narrow.
 
 ```{r, echo=FALSE}
 library(ggplot2)
+y <- diamond$price; x <- diamond$carat;
+fit <- lm(y ~ x)
+
 newx = data.frame(x = seq(min(x), max(x), length = 100))
 p1 = data.frame(predict(fit, newdata= newx,interval = ("confidence")))
 p2 = data.frame(predict(fit, newdata = newx,interval = ("prediction")))
@@ -54,7 +56,8 @@ g
 Summary
 ========================================================
 
-- Fast and simple to use
-- Highly accurate prediction
-- Levels buyer experience
-- Drive down price of diamonds
+This application provides a fast and simple way to predict the price of diamonds based on carats and cut.
+
+The prediction is based on the historial price of diamonds, which ensures it is highly accurate.
+
+Use of the application provides novice buyers with accurate estimates for diamond prices and helps to keep costs reasonable.

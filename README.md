@@ -1,6 +1,6 @@
 # Developing Data Products Assignment
 
-Part 1: [The Shiny Application](https://phickman.shinyapps.io/Carat/)
+Part 1: [The Shiny Application](https://phickman.shinyapps.io/ShinyCarats/)
 
 Part 2: [The Pitch](http://rpubs.com/phickman/carat)
 
