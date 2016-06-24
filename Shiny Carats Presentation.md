@@ -3,6 +3,7 @@ Shiny Carats Presentation
 author: Paul Hickman
 date: June 2016
 autosize: true
+transition: rotate
 
 An explanation of how diamond buyers can check they are getting a good deal.
 
